@@ -4,7 +4,7 @@ import db from "./Config/db.js";
 import cors from "cors";
 //Routes
 import serviceRoute from "./routes/serviceRoute.js";
-
+import authRoute from "./routes/authRoute.js"
 configDotenv();
 const app = express();
 
@@ -17,6 +17,7 @@ db();
 //Define routes
 
 app.use("/api/service",serviceRoute);
+app.use("/api/auth",authRoute)
 app.get("/",(req,res)=>{
     res.send("E-Health Api is working !")
 })
