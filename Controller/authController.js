@@ -3,7 +3,6 @@ import catchAsync from '../utils/catchAsync.js';
 import { handleTokenGeneration } from '../middleware/tokenMiddleware.js';
 import appError from '../utils/appError.js';
 
-
 export const login = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
 
