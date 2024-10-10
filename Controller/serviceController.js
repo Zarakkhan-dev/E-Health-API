@@ -1,6 +1,6 @@
 import catchAsync from "../utils/catchAsync.js"
 import Service from "../models/Service.js"
-import AppError from "../utils/AppError.js";
+import appError from "../utils/appError.js";
 //Create a new service
 export const createService = catchAsync(async (req, res, next) => {
     const { serviceType, number } = req.body;
@@ -28,7 +28,7 @@ export  const getServiceById = catchAsync(async (req, res, next) => {
     const service = await Service.findById(req.params.id);
     
     if (!service) {
-        return next(new AppError('Service not found', 404));
+        return next(new appError('Service not found', 404));
     }
     
     res.status(200).json({
@@ -45,7 +45,7 @@ export const updateService = catchAsync(async (req, res, next) => {
     });
     
     if (!service) {
-        return next(new AppError('Service not found', 404));
+        return next(new appError('Service not found', 404));
     }
     
     res.status(200).json({
@@ -59,7 +59,7 @@ export const deleteService = catchAsync(async (req, res, next) => {
     const service = await Service.findByIdAndDelete(req.params.id);
     
     if (!service) {
-        return next(new AppError('Service not found', 404));
+        return next(new appError('Service not found', 404));
     }
     
     res.status(204).json({

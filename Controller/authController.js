@@ -1,7 +1,7 @@
 import  User from '../models/User.js';
 import catchAsync from '../utils/catchAsync.js';
 import { handleTokenGeneration } from '../middleware/tokenMiddleware.js';
-import AppError from '../utils/AppError.js';
+import appError from '../utils/appError.js';
 
 
 export const login = catchAsync(async (req, res, next) => {
@@ -9,12 +9,12 @@ export const login = catchAsync(async (req, res, next) => {
 
 
     if (!email || !password) {
-        return next(new AppError('Please provide email and password!', 400));
+        return next(new appError('Please provide email and password!', 400));
     }
 
     const user = await User.findOne({ email }).select('+password');
     if (!user || !(await user.comparePassword(password))) {
-        return next(new AppError('Incorrect email or password', 401));
+        return next(new appError('Incorrect email or password', 401));
     }
 
     await handleTokenGeneration(user, res);
@@ -39,7 +39,7 @@ export const logoutById = catchAsync(async (req, res, next) => {
     const user = await User.findById(id) 
     console.log(user);
     if(!user) {
-        return  next(new AppError("User not Found",404 ))
+        return  next(new appError("User not Found",404 ))
     }
     user.accessToken = null;
     user.refreshToken = null;
@@ -68,7 +68,7 @@ export const getUserById = catchAsync(async (req, res, next) => {
     const user = await User.findById(req.params.id);
 
     if (!user) {
-        return next(new AppError('User not found', 404));
+        return next(new appError('User not found', 404));
     }
 
     res.status(200).json({
@@ -87,7 +87,7 @@ export const updateUserById = catchAsync(async (req, res, next) => {
     });
 
     if (!updatedUser) {
-        return next(new AppError('User not found', 404));
+        return next(new appError('User not found', 404));
     }
 
     res.status(200).json({
@@ -100,7 +100,7 @@ export const deleteUserById = catchAsync(async (req, res, next) => {
     const user = await User.findByIdAndDelete(req.params.id);
 
     if (!user) {
-        return next(new AppError('User not found', 404));
+        return next(new appError('User not found', 404));
     }
 
     res.status(204).json({
