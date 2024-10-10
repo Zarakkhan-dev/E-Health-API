@@ -1,6 +1,6 @@
 import catchAsync from "../utils/catchAsync.js"
 import Service from "../models/Service.js"
-import AppError from "../utils/appError.js";
+import AppError from "../utils/AppError.js";
 //Create a new service
 export const createService = catchAsync(async (req, res, next) => {
     const { serviceType, number } = req.body;
