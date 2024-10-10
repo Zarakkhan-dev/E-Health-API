@@ -5,7 +5,6 @@ import AppError from "../utils/AppError.js";
 export const createService = catchAsync(async (req, res, next) => {
     const { serviceType, number } = req.body;
     
-    // Validation or other logic can be added here if necessary
     const service = await Service.create({ serviceType, number });
     
     res.status(201).json({
