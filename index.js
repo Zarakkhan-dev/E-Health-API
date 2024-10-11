@@ -15,15 +15,15 @@ app.use(cors());
 db();
 
 //Define routes
-
-app.use("/api/service",serviceRoute);
-app.use("/api/auth",authRoute)
 app.get("/",(req,res)=>{
     res.send("E-Health Api is working !")
 })
+app.use("/api/service",serviceRoute);
+app.use("/api/auth",authRoute)
 
-app.get("*",()=>{
-    res.send("")
+
+app.use("*",()=>{
+    res.send("Internal Error")
 })
 
 

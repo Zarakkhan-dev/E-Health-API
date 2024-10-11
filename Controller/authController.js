@@ -1,4 +1,4 @@
-import  User from '../models/User.js';
+import User from "../models/User.js";
 import catchAsync from '../utils/catchAsync.js';
 import { handleTokenGeneration } from '../middleware/tokenMiddleware.js';
 import appError from '../utils/appError.js';
